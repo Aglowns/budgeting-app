@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "UNCP Budgeting",
+    "slug": "uncp-budgeting",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#990000"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.uncp.budgeting"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#990000"
+      },
+      "package": "com.uncp.budgeting",
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "primaryColor": "#990000",
+    "description": "UNCP Student Budgeting App - Manage your finances like a Brave!"
+  }
+}
+
+
+

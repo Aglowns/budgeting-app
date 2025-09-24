@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 font-sans antialiased;
+    min-height: 100vh;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .card-uncp {
+    @apply bg-white rounded-xl shadow-uncp border border-gray-100 backdrop-blur-sm;
+  }
+  
+  .card-uncp-hover {
+    @apply card-uncp hover:shadow-uncp-lg transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  .btn-primary {
+    @apply bg-uncp-gradient text-white font-semibold py-3 px-6 rounded-lg shadow-uncp hover:shadow-uncp-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-primary-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gold-gradient text-accent-900 font-semibold py-3 px-6 rounded-lg shadow-gold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-secondary-200;
+  }
+  
+  .gradient-text {
+    @apply bg-hero-gradient bg-clip-text text-transparent;
+  }
+  
+  .stat-card {
+    @apply card-uncp p-6 relative overflow-hidden;
+  }
+  
+  .stat-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-uncp-gradient;
+  }
+}
