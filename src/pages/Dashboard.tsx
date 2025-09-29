@@ -22,30 +22,43 @@ export const Dashboard = () => {
   const [showSpendingInsights, setShowSpendingInsights] = useState(false);
   const [activeTab, setActiveTab] = useState(1); // Track active tab (1-4)
 
+  // Debug logging
+  console.log('Dashboard render:', { user, accounts, transactions, notes, savingsGoals });
+
   const stats = useMemo(() => {
-    const now = new Date();
-    const monthStart = startOfMonth(now);
-    const monthEnd = endOfMonth(now);
+    try {
+      const now = new Date();
+      const monthStart = startOfMonth(now);
+      const monthEnd = endOfMonth(now);
 
-    const monthlyBudget = user?.settings.monthlyBudget || 0;
+      const monthlyBudget = user?.settings?.monthlyBudget || 0;
 
-    const monthlyTransactions = transactions.filter(t => {
-      const date = parseISO(t.createdAt);
-      return date >= monthStart && date <= monthEnd && t.type === 'debit';
-    });
+      const monthlyTransactions = (transactions || []).filter(t => {
+        if (!t || !t.createdAt) return false;
+        const date = parseISO(t.createdAt);
+        return date >= monthStart && date <= monthEnd && t.type === 'debit';
+      });
 
-    const monthlySpend = monthlyTransactions.reduce((sum, t) => sum + t.amount, 0);
+      const monthlySpend = monthlyTransactions.reduce((sum, t) => sum + (t.amount || 0), 0);
 
-    return {
-      monthlySpend,
-      monthlyRemaining: monthlyBudget - monthlySpend,
-      monthlyBudget,
-    };
+      return {
+        monthlySpend,
+        monthlyRemaining: monthlyBudget - monthlySpend,
+        monthlyBudget,
+      };
+    } catch (error) {
+      console.error('Error calculating stats:', error);
+      return {
+        monthlySpend: 0,
+        monthlyRemaining: 0,
+        monthlyBudget: 0,
+      };
+    }
   }, [transactions, user]);
 
-  const recentTransactions = transactions.slice(0, 5);
-  const checkingAccount = accounts.find(a => a.type === 'checking');
-  const savingsAccount = accounts.find(a => a.type === 'savings');
+  const recentTransactions = (transactions || []).slice(0, 5);
+  const checkingAccount = (accounts || []).find(a => a.type === 'checking');
+  const savingsAccount = (accounts || []).find(a => a.type === 'savings');
 
   return (
     <div className="min-h-screen bg-gray-50">
