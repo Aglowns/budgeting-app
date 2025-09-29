@@ -3,16 +3,18 @@ export default function handler(req, res) {
     {
       id: 'goal_1',
       name: 'Emergency Fund',
-      target: 10000,
-      current: 5000,
-      targetDate: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+      targetAmount: 10000,
+      currentAmount: 5000,
+      deadline: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(),
+      priority: 'high',
     },
     {
       id: 'goal_2',
       name: 'Vacation Fund',
-      target: 2000,
-      current: 500,
-      targetDate: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString(),
+      targetAmount: 2000,
+      currentAmount: 500,
+      deadline: new Date(Date.now() + 180 * 24 * 60 * 60 * 1000).toISOString(),
+      priority: 'medium',
     }
   ];
 
@@ -24,7 +26,7 @@ export default function handler(req, res) {
     const newGoal = {
       ...req.body,
       id: `goal_${Date.now()}`,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
     return res.status(200).json(newGoal);
   }
