@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Layout } from '@/components/Layout';
@@ -13,16 +12,6 @@ import { Savings } from '@/pages/Savings';
 import { Settings } from '@/pages/Settings';
 
 function App() {
-  useEffect(() => {
-    // Start MSW in development
-    if (import.meta.env.DEV) {
-      import('@/mocks/browser').then(({ worker }) => {
-        worker.start({
-          onUnhandledRequest: 'bypass',
-        });
-      });
-    }
-  }, []);
 
   return (
     <Router>
