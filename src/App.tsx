@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Layout } from '@/components/Layout';
 import { DemoMode } from '@/components/DemoMode';
+import { TestComponent } from '@/components/TestComponent';
 import { Login } from '@/pages/Login';
 import { Signup } from '@/pages/Signup';
 import { LinkWizard } from '@/pages/LinkWizard';
@@ -22,6 +23,8 @@ function App() {
     <Router>
       {isDemoMode && <DemoMode />}
       <Routes>
+        {/* Test route */}
+        <Route path="/test" element={<TestComponent />} />
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
