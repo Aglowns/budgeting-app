@@ -4,6 +4,7 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Layout } from '@/components/Layout';
 import { DemoMode } from '@/components/DemoMode';
 import { TestComponent } from '@/components/TestComponent';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { Login } from '@/pages/Login';
 import { Signup } from '@/pages/Signup';
 import { LinkWizard } from '@/pages/LinkWizard';
@@ -49,7 +50,11 @@ function App() {
           }
         >
           <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard" element={
+            <ErrorBoundary>
+              <Dashboard />
+            </ErrorBoundary>
+          } />
           <Route path="transactions" element={<Transactions />} />
           <Route path="notes" element={<Notes />} />
           <Route path="savings" element={<Savings />} />

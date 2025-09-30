@@ -25,6 +25,21 @@ export const Dashboard = () => {
   // Debug logging
   console.log('Dashboard render:', { user, accounts, transactions, notes, savingsGoals });
 
+  // Early return if critical data is missing
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-2xl">⏳</span>
+          </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Loading...</h2>
+          <p className="text-gray-600">Please wait while we load your data.</p>
+        </div>
+      </div>
+    );
+  }
+
   const stats = useMemo(() => {
     try {
       const now = new Date();
@@ -68,7 +83,7 @@ export const Dashboard = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 mb-1">
-                Hello, {user?.name ? user.name.split(' ')[0] : 'Student'} 👋
+                Hello, {user?.name && typeof user.name === 'string' ? user.name.split(' ')[0] : 'Student'} 👋
               </h1>
               <p className="text-gray-600">
                 Here's your financial overview
