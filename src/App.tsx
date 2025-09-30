@@ -12,6 +12,7 @@ import { Savings } from '@/pages/Savings';
 import { Settings } from '@/pages/Settings';
 
 function App() {
+  console.log('App component rendering...');
 
   return (
     <Router>

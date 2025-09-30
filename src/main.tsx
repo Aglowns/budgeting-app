@@ -3,19 +3,29 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-// Start MSW in both development and production
-import('./mocks/browser').then(({ worker }) => {
-  worker.start({
-    onUnhandledRequest: 'bypass',
-  }).then(() => {
-    console.log('MSW started successfully');
-  }).catch((error) => {
-    console.error('Failed to start MSW:', error);
-  });
-});
+// Simple test to see if React is working
+console.log('React app starting...');
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+// Start MSW in both development and production
+async function startApp() {
+  try {
+    const { worker } = await import('./mocks/browser');
+    await worker.start({
+      onUnhandledRequest: 'bypass',
+    });
+    console.log('MSW started successfully');
+  } catch (error) {
+    console.error('Failed to start MSW:', error);
+  }
+  
+  // Render the app regardless of MSW status
+  console.log('Rendering React app...');
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
+  console.log('React app rendered');
+}
+
+startApp();
