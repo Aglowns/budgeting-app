@@ -57,8 +57,8 @@ export const Dashboard = () => {
   }, [transactions, user]);
 
   const recentTransactions = (transactions || []).slice(0, 5);
-  const checkingAccount = (accounts || []).find(a => a.type === 'checking');
-  const savingsAccount = (accounts || []).find(a => a.type === 'savings');
+  const checkingAccount = (accounts || []).find(a => a && a.type === 'checking');
+  const savingsAccount = (accounts || []).find(a => a && a.type === 'savings');
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -68,7 +68,7 @@ export const Dashboard = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 mb-1">
-                Hello, {user?.name?.split(' ')[0] || 'Student'} 👋
+                Hello, {user?.name ? user.name.split(' ')[0] : 'Student'} 👋
               </h1>
               <p className="text-gray-600">
                 Here's your financial overview
@@ -359,7 +359,7 @@ export const Dashboard = () => {
           </div>
           
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
-            {savingsGoals.length === 0 ? (
+            {(savingsGoals || []).length === 0 ? (
               <div className="text-center py-6">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🎯</span>
@@ -376,7 +376,7 @@ export const Dashboard = () => {
               </div>
             ) : (
               <div className="space-y-4">
-                {savingsGoals.slice(0, 2).map((goal, index) => {
+                {(savingsGoals || []).slice(0, 2).map((goal, index) => {
                   const progress = (goal.currentAmount / goal.targetAmount) * 100;
                   return (
                     <motion.div
@@ -411,7 +411,7 @@ export const Dashboard = () => {
         </div>
 
         {/* Recent Notes */}
-        {notes.length > 0 && (
+        {(notes || []).length > 0 && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold text-gray-900">Recent Notes</h3>
@@ -427,7 +427,7 @@ export const Dashboard = () => {
             
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
               <div className="space-y-3">
-                {notes.slice(0, 2).map((note, index) => (
+                {(notes || []).slice(0, 2).map((note, index) => (
                   <motion.div
                     key={note.id}
                     initial={{ opacity: 0, y: 10 }}

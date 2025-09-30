@@ -15,6 +15,12 @@
       }
     },
     {
+      "src": "/mockServiceWorker.js",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
