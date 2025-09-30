@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Layout } from '@/components/Layout';
+import { DemoMode } from '@/components/DemoMode';
 import { Login } from '@/pages/Login';
 import { Signup } from '@/pages/Signup';
 import { LinkWizard } from '@/pages/LinkWizard';
@@ -13,9 +14,13 @@ import { Settings } from '@/pages/Settings';
 
 function App() {
   console.log('App component rendering...');
+  
+  // Check if we should use demo mode
+  const isDemoMode = window.location.search.includes('demo=true');
 
   return (
     <Router>
+      {isDemoMode && <DemoMode />}
       <Routes>
         {/* Public routes */}
         <Route path="/login" element={<Login />} />
